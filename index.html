@@ -3,6 +3,7 @@ layout: default
 ---
 {% assign sorted_posts = site.posts | sort: 'date' | reverse %}
 {% assign featured_posts = sorted_posts | slice: 0, 3 %}
+{% assign recent_list = sorted_posts | slice: 0, 10 %}
 
 <div class="tagline-strip">
   <p class="tagline-text">Research notes, tutorials, and project write-ups</p>
@@ -14,7 +15,7 @@ layout: default
     {% for post in featured_posts %}
     <article class="featured-item{% if forloop.last == false %} featured-item-divider{% endif %}">
       {% if post.category %}
-      <span class="category-tag">{{ post.category }}</span>
+      <span class="featured-category">{{ post.category }}</span>
       {% endif %}
       <h2 class="featured-title">
         <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
@@ -31,7 +32,7 @@ layout: default
   <div class="featured-right">
     <p class="also-label">All articles</p>
     <ul class="also-list">
-      {% for post in sorted_posts %}
+      {% for post in recent_list %}
       <li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
       {% endfor %}
     </ul>

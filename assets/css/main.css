@@ -399,6 +399,16 @@ img {
   overflow-y: auto;
 }
 
+.featured-category {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-faint);
+  margin-bottom: 8px;
+}
+
 .featured-title {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.5rem;
