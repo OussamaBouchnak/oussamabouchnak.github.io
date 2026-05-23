@@ -4,136 +4,159 @@
   {% include head.html %}
 </head>
 <body>
+  {% include header.html %}
   <div class="page-wrapper">
-    {% include header.html %}
     <main class="site-main">
       {{ content }}
     </main>
-    {% include footer.html %}
   </div>
+  {% include footer.html %}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/shell.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/yaml.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/rust.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/ruby.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/markdown.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/css.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/scss.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/dockerfile.min.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      hljs.configure({ cssSelector: 'pre code, code.language-plaintext' });
-      hljs.highlightAll();
+    (function() {
+      function buildCodeBlock(codeEl) {
+        var pre = codeEl.parentElement;
+        if (!pre || pre.tagName !== 'PRE') return;
 
-      document.querySelectorAll('pre code').forEach(function(block) {
-        var pre = block.parentElement;
-        if (pre.parentElement && pre.parentElement.classList.contains('code-block')) return;
+        var container = pre.parentElement;
+        if (!container) return;
 
         var wrapper = document.createElement('div');
         wrapper.className = 'code-block';
-        pre.parentNode.insertBefore(wrapper, pre);
+        container.insertBefore(wrapper, pre);
         wrapper.appendChild(pre);
 
-        var langClass = Array.from(block.classList).find(function(c) { return c.startsWith('language-'); });
-        var langName = langClass ? langClass.replace('language-', '') : 'CODE';
-        var isShell = (langName === 'bash' || langName === 'sh' || langName === 'shell' || langName === 'zsh');
+        var lang = '';
+        var classes = codeEl.className.split(/\s+/);
+        for (var i = 0; i < classes.length; i++) {
+          if (classes[i].indexOf('language-') === 0) {
+            lang = classes[i].replace('language-', '');
+            break;
+          }
+        }
+        if (!lang) lang = 'code';
+        var isShell = (lang === 'bash' || lang === 'sh' || lang === 'shell' || lang === 'zsh');
 
-        var topBar = document.createElement('div');
-        topBar.className = 'code-top-bar';
+        var bar = document.createElement('div');
+        bar.className = 'code-bar';
 
-        var leftSide = document.createElement('div');
-        leftSide.className = 'code-left';
+        var left = document.createElement('div');
+        left.className = 'code-bar-left';
 
         if (isShell) {
           var dots = document.createElement('span');
           dots.className = 'code-dots';
-          dots.innerHTML = '<span></span><span></span><span></span>';
-          leftSide.appendChild(dots);
+          dots.innerHTML = '<i></i><i></i><i></i>';
+          left.appendChild(dots);
         }
 
-        var langLabel = document.createElement('span');
-        langLabel.className = 'code-lang-label';
-        langLabel.textContent = langName.toUpperCase();
-        leftSide.appendChild(langLabel);
+        var label = document.createElement('span');
+        label.className = 'code-lang';
+        label.textContent = lang === 'code' ? 'CODE' : lang.toUpperCase();
+        left.appendChild(label);
 
-        var copyBtn = document.createElement('button');
-        copyBtn.className = 'code-copy-btn';
-        copyBtn.textContent = 'COPY';
-        copyBtn.addEventListener('click', function() {
-          var text = block.textContent;
-          if (navigator.clipboard) {
-            navigator.clipboard.writeText(text).then(function() {
-              copyBtn.textContent = 'COPIED \u2713';
-              setTimeout(function() { copyBtn.textContent = 'COPY'; }, 2000);
+        var btn = document.createElement('button');
+        btn.className = 'code-copy';
+        btn.textContent = 'COPY';
+        btn.addEventListener('click', function() {
+          var text = codeEl.textContent;
+          var done = function() {
+            btn.textContent = 'COPIED';
+            btn.classList.add('copied');
+            setTimeout(function() {
+              btn.textContent = 'COPY';
+              btn.classList.remove('copied');
+            }, 2000);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(done).catch(function() {
+              btn.textContent = 'ERROR';
+              setTimeout(function() { btn.textContent = 'COPY'; }, 2000);
             });
           } else {
             var ta = document.createElement('textarea');
             ta.value = text;
-            ta.style.position = 'fixed';
-            ta.style.opacity = '0';
+            ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none;';
             document.body.appendChild(ta);
             ta.select();
-            document.execCommand('copy');
+            try { document.execCommand('copy'); done(); }
+            catch(e) { btn.textContent = 'ERROR'; setTimeout(function() { btn.textContent = 'COPY'; }, 2000); }
             document.body.removeChild(ta);
-            copyBtn.textContent = 'COPIED \u2713';
-            setTimeout(function() { copyBtn.textContent = 'COPY'; }, 2000);
           }
         });
 
-        topBar.appendChild(leftSide);
-        topBar.appendChild(copyBtn);
-        wrapper.insertBefore(topBar, wrapper.firstChild);
+        bar.appendChild(left);
+        bar.appendChild(btn);
+        wrapper.insertBefore(bar, wrapper.firstChild);
 
-        var lines = block.innerHTML.split('\n');
-        if (lines.length > 1 && lines[lines.length - 1] === '') lines.pop();
-        if (lines.length > 4) {
+        var rawLines = codeEl.textContent.split('\n');
+        if (rawLines.length && rawLines[rawLines.length - 1] === '') rawLines.pop();
+        var lineCount = rawLines.length;
+
+        if (lineCount > 4) {
           var grid = document.createElement('div');
           grid.className = 'code-grid';
 
-          var lineNums = document.createElement('div');
-          lineNums.className = 'code-line-numbers';
-          for (var i = 0; i < lines.length; i++) {
-            var numSpan = document.createElement('span');
-            numSpan.textContent = (i + 1);
-            lineNums.appendChild(numSpan);
+          var nums = document.createElement('div');
+          nums.className = 'code-ln';
+          for (var j = 1; j <= lineCount; j++) {
+            var n = document.createElement('span');
+            n.textContent = j;
+            nums.appendChild(n);
           }
 
-          var codeArea = document.createElement('div');
-          codeArea.className = 'code-content';
-          codeArea.appendChild(block);
+          var body = document.createElement('div');
+          body.className = 'code-body';
+          body.appendChild(pre);
 
-          grid.appendChild(lineNums);
-          grid.appendChild(codeArea);
+          grid.appendChild(nums);
+          grid.appendChild(body);
           wrapper.appendChild(grid);
         } else {
-          var codeArea = document.createElement('div');
-          codeArea.className = 'code-content code-content-full';
-          codeArea.appendChild(block);
-          wrapper.appendChild(codeArea);
+          var body = document.createElement('div');
+          body.className = 'code-body code-body-full';
+          body.appendChild(pre);
+          wrapper.appendChild(body);
         }
 
         if (isShell) {
-          var shellLines = lines;
-          block.innerHTML = shellLines.map(function(line) {
-            if (/^\$\s/.test(line)) {
-              return '<span class="shell-prompt">$</span><span class="shell-cmd">' + line.replace(/^\$/, '') + '</span>';
-            } else if (/^\s*#/.test(line)) {
-              return '<span class="shell-comment">' + line + '</span>';
-            } else if (/^\s*$/.test(line)) {
-              return '';
-            } else {
-              return '<span class="shell-output">' + line + '</span>';
-            }
-          }).join('\n');
+          var html = codeEl.innerHTML;
+          html = html.replace(/^(<span[^>]*>)?(\$\s)/gm, function(m, span, dollar) {
+            return '<span class="sh-prompt">$</span> ' + (span || '');
+          });
+          html = html.replace(/^(<span[^>]*>)?(#.*)/gm, function(m, span, comment) {
+            return '<span class="sh-comment">' + m + '</span>';
+          });
+          codeEl.innerHTML = html;
         }
-      });
-    });
+      }
+
+      function init() {
+        hljs.configure({ cssSelector: 'pre code:not(.language-plaintext)' });
+        hljs.highlightAll();
+
+        var all = document.querySelectorAll('pre code');
+        for (var i = 0; i < all.length; i++) {
+          buildCodeBlock(all[i]);
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
   </script>
 </body>
 </html>
