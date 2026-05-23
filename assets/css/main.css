@@ -148,6 +148,11 @@ img {
   letter-spacing: 0.18em;
   color: var(--color-ink);
   transition: opacity 200ms ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex-shrink: 1;
 }
 
 .site-name:hover {
@@ -158,6 +163,7 @@ img {
   display: flex;
   align-items: center;
   gap: 0;
+  flex-shrink: 0;
 }
 
 .nav-link {
@@ -1308,6 +1314,7 @@ img {
   .site-name {
     font-size: 1rem;
     letter-spacing: 0.12em;
+    max-width: 55%;
   }
 
   .nav-link {
@@ -1415,8 +1422,9 @@ img {
   }
 
   .site-name {
-    font-size: 0.9rem;
-    letter-spacing: 0.1em;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    max-width: 50%;
   }
 
   .nav-link {
@@ -1676,8 +1684,9 @@ img {
 /* Very small phones  (< 380px) */
 @media (max-width: 380px) {
   .site-name {
-    font-size: 0.75rem;
-    letter-spacing: 0.06em;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    max-width: 45%;
   }
 
   .nav-link {
