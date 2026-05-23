@@ -3,7 +3,6 @@ layout: default
 ---
 {% assign sorted_posts = site.posts | sort: 'date' | reverse %}
 {% assign featured_posts = sorted_posts | slice: 0, 3 %}
-{% assign rest_posts = sorted_posts | slice: 3, sorted_posts.size %}
 
 <div class="tagline-strip">
   <p class="tagline-text">Research notes, tutorials, and project write-ups</p>
@@ -30,13 +29,11 @@ layout: default
   </div>
   <div class="featured-divider"></div>
   <div class="featured-right">
-    {% if rest_posts.size > 0 %}
     <p class="also-label">All articles</p>
     <ul class="also-list">
-      {% for post in rest_posts %}
+      {% for post in sorted_posts %}
       <li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
       {% endfor %}
     </ul>
-    {% endif %}
   </div>
 </section>
