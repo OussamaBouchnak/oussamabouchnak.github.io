@@ -1,0 +1,15 @@
+<header class="site-header">
+  <div class="header-inner">
+    <a href="{{ site.baseurl }}/" class="site-name">{{ site.title }}</a>
+    <nav class="site-nav">
+      {% assign nav_items = "Writing" | split: ", " %}
+      {% assign nav_urls = "/blog/" | split: ", " %}
+
+      <a href="{{ site.baseurl }}/blog/" class="nav-link{% if page.url contains '/blog/' or page.layout == 'post' %} active{% endif %}">Writing</a>
+      <span class="nav-sep">·</span>
+      <a href="{{ site.baseurl }}/projects/" class="nav-link{% if page.url contains '/projects/' %} active{% endif %}">Projects</a>
+      <span class="nav-sep">·</span>
+      <a href="{{ site.baseurl }}/about/" class="nav-link{% if page.url contains '/about/' %} active{% endif %}">About</a>
+    </nav>
+  </div>
+</header>

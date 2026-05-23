@@ -1,0 +1,13 @@
+title: "Notes & Reflections"
+description: "Research notes, tutorials, and project write-ups"
+author: "Your Name"
+url: "https://oussamabouchnak.github.io"
+baseurl: ""
+permalink: /:year/:month/:title/
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+
+markdown: kramdown

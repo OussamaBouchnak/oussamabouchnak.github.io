@@ -1,0 +1,36 @@
+---
+layout: default
+---
+{% assign word_count = content | strip_html | number_of_words %}
+{% assign read_time = word_count | divided_by: 200 | plus: 1 %}
+
+<article class="post">
+  <header class="post-header">
+    <div class="post-header-inner">
+      {% if page.category %}
+      <span class="category-tag">{{ page.category }}</span>
+      {% endif %}
+      <h1 class="post-title">{{ page.title }}</h1>
+      <div class="post-meta">
+        <span>{{ page.date | date: "%B %d, %Y" }}</span>
+        <span class="meta-sep">·</span>
+        <span>{{ read_time }} min read</span>
+        <span class="meta-sep">·</span>
+        <span>{{ word_count | append: '' }} words</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="ornament">✦</div>
+
+  <div class="post-body">
+    {{ content }}
+  </div>
+
+  <footer class="post-footer">
+    <div class="post-footer-inner">
+      <a href="/blog/" class="back-link">← Back to Writing</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ site.baseurl }}{{ page.url | uri_escape }}" class="share-link" target="_blank" rel="noopener">Share on LinkedIn →</a>
+    </div>
+  </footer>
+</article>

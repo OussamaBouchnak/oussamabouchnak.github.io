@@ -1,0 +1,37 @@
+- name: "Soft Attention Visualizer"
+  description: "An interactive tool for visualizing attention weights in transformer models. Supports loading weights from PyTorch checkpoints and renders heatmaps over token sequences."
+  tech:
+    - "Python"
+    - "PyTorch"
+    - "D3.js"
+    - "Flask"
+  url: "https://github.com/example/attention-viz"
+  type: "github"
+
+- name: "Prose to SQL"
+  description: "Natural language interface for relational databases. Converts English questions to SQL queries using a fine-tuned T5 model, with an optional human-in-the-loop verification step."
+  tech:
+    - "Python"
+    - "Hugging Face"
+    - "PostgreSQL"
+    - "FastAPI"
+  url: "https://github.com/example/prose-to-sql"
+  type: "github"
+
+- name: "Minimal Diffusion"
+  description: "A pedagogical implementation of denoising diffusion probabilistic models from scratch. Includes annotated Jupyter notebooks walking through each component of the forward and reverse processes."
+  tech:
+    - "Python"
+    - "PyTorch"
+    - "Jupyter"
+  url: "https://github.com/example/minimal-diffusion"
+  type: "github"
+
+- name: "On the Geometry of Latent Spaces"
+  description: "A research paper investigating the topological properties of latent representations in variational autoencoders, with experiments on MNIST and CelebA."
+  tech:
+    - "Mathematics"
+    - "Python"
+    - "TensorFlow"
+  url: "https://example.com/latent-geometry"
+  type: "paper"
