@@ -358,7 +358,7 @@ img {
    -------------------------------------------------- */
 .featured-post {
   display: grid;
-  grid-template-columns: 1fr 1px 360px;
+  grid-template-columns: 1fr 1px 1fr;
   min-height: 300px;
 }
 
