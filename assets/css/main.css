@@ -199,52 +199,35 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  border: none;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--color-border);
   background: none;
   cursor: pointer;
   color: var(--color-muted);
   margin-left: 18px;
-  border-radius: 50%;
+  border-radius: 8px;
   transition: all 200ms ease;
-  position: relative;
-  top: 1px;
+  flex-shrink: 0;
 }
 
 .theme-toggle:hover {
   color: var(--color-ink);
   background: var(--color-code-bg);
+  border-color: var(--color-accent);
 }
 
 .theme-toggle svg {
-  width: 18px;
-  height: 18px;
-  display: block;
-  transition: transform 500ms ease, opacity 300ms ease;
+  width: 16px;
+  height: 16px;
+  display: none;
 }
 
-.theme-toggle .icon-sun {
-  position: absolute;
-  opacity: 1;
-  transform: rotate(0deg) scale(1);
-}
+.theme-toggle .icon-sun { display: block; }
+.theme-toggle .icon-moon { display: none; }
 
-.theme-toggle .icon-moon {
-  position: absolute;
-  opacity: 0;
-  transform: rotate(-90deg) scale(0.5);
-}
-
-[data-theme="dark"] .theme-toggle .icon-sun {
-  opacity: 0;
-  transform: rotate(90deg) scale(0.5);
-}
-
-[data-theme="dark"] .theme-toggle .icon-moon {
-  opacity: 1;
-  transform: rotate(0deg) scale(1);
-}
+[data-theme="dark"] .theme-toggle .icon-sun { display: none; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: block; }
 
 /* --------------------------------------------------
    SITE FOOTER - full width
@@ -1084,27 +1067,6 @@ img {
   color: var(--color-accent-text);
 }
 
-.code-grid {
-  display: grid;
-  grid-template-columns: 48px 1fr;
-}
-
-.code-ln {
-  background: var(--color-code-bg);
-  border-right: 1px solid var(--color-border);
-  padding: 18px 10px;
-  text-align: right;
-  user-select: none;
-}
-
-.code-ln span {
-  display: block;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  line-height: 1.75;
-  color: var(--color-warm-gray);
-}
-
 .code-body {
   background: var(--color-paper);
   overflow-x: auto;
@@ -1126,10 +1088,6 @@ img {
   white-space: pre;
   background: transparent;
   padding: 0;
-}
-
-.code-body-full {
-  grid-column: 1 / -1;
 }
 
 /* --------------------------------------------------

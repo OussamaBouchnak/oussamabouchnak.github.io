@@ -128,35 +128,10 @@
         bar.appendChild(btn2);
         wrapper.insertBefore(bar, wrapper.firstChild);
 
-        var rawLines = codeEl.textContent.split('\n');
-        if (rawLines.length && rawLines[rawLines.length - 1] === '') rawLines.pop();
-        var lineCount = rawLines.length;
-
-        if (lineCount > 4) {
-          var grid = document.createElement('div');
-          grid.className = 'code-grid';
-
-          var nums = document.createElement('div');
-          nums.className = 'code-ln';
-          for (var j = 1; j <= lineCount; j++) {
-            var n = document.createElement('span');
-            n.textContent = j;
-            nums.appendChild(n);
-          }
-
-          var bodyEl = document.createElement('div');
-          bodyEl.className = 'code-body';
-          bodyEl.appendChild(pre);
-
-          grid.appendChild(nums);
-          grid.appendChild(bodyEl);
-          wrapper.appendChild(grid);
-        } else {
-          var bodyEl = document.createElement('div');
-          bodyEl.className = 'code-body code-body-full';
-          bodyEl.appendChild(pre);
-          wrapper.appendChild(bodyEl);
-        }
+        var bodyEl = document.createElement('div');
+        bodyEl.className = 'code-body';
+        bodyEl.appendChild(pre);
+        wrapper.appendChild(bodyEl);
 
         if (isShell) {
           var html = codeEl.innerHTML;
