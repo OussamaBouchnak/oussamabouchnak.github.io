@@ -1175,6 +1175,28 @@ img {
    -------------------------------------------------- */
 [data-theme="dark"] .hljs {
   color: #e8e0d5 !important;
+  background: transparent !important;
+}
+
+/* Ensure nothing stays black-on-dark */
+[data-theme="dark"] .hljs-operator,
+[data-theme="dark"] .hljs-punctuation,
+[data-theme="dark"] .hljs-variable,
+[data-theme="dark"] .hljs-name,
+[data-theme="dark"] .hljs-template-variable,
+[data-theme="dark"] .hljs-params,
+[data-theme="dark"] .hljs-deletion,
+[data-theme="dark"] .hljs-selector-id,
+[data-theme="dark"] .hljs-selector-class,
+[data-theme="dark"] .hljs-selector-attr,
+[data-theme="dark"] .hljs-attribute,
+[data-theme="dark"] .hljs-property,
+[data-theme="dark"] .hljs-regexp,
+[data-theme="dark"] .hljs-doctag,
+[data-theme="dark"] .hljs-code,
+[data-theme="dark"] .hljs-title,
+[data-theme="dark"] .hljs-char.escape_ {
+  color: #e8e0d5;
 }
 
 [data-theme="dark"] .hljs-keyword,
@@ -1222,6 +1244,18 @@ img {
 [data-theme="dark"] .hljs-link {
   color: #e0b04c;
 }
+
+[data-theme="dark"] .hljs-emphasis {
+  font-style: italic;
+}
+
+[data-theme="dark"] .hljs-strong {
+  font-weight: 600;
+}
+
+[data-theme="dark"] .hljs-subst {
+  color: #e8e0d5;
+}  
 
 /* Shell prompt */
 .sh-prompt {

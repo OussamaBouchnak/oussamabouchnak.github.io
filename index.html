@@ -25,7 +25,7 @@ layout: default
   <div class="featured-right">
     <p class="featured-date">{{ featured.date | date: "%B %d, %Y" }}</p>
     {% if also_posts.size > 0 %}
-    <p class="also-label">Also this week</p>
+    <p class="also-label">Recent</p>
     <ul class="also-list">
       {% for post in also_posts %}
       <li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
