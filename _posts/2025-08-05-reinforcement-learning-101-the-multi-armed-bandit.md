@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Reinforcement Learning 101: The Multi-Armed Bandit"
+title: "test"
 date: 2025-08-05
-category: "Machine Learning"
-excerpt: "Starting with the simplest RL problem to build intuition about exploration, exploitation, and regret."
+category: "testing"
+excerpt: "test desc"
 ---
 
-The multi-armed bandit problem is to reinforcement learning what linear regression is to supervised learning. It isolates the core challenge of exploration versus exploitation in its purest form.
+this is just to test how an article looks like 
