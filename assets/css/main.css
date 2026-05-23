@@ -4,24 +4,61 @@
    ============================================================ */
 
 /* --------------------------------------------------
-   DESIGN TOKENS
+   DESIGN TOKENS — Light (default)
    -------------------------------------------------- */
 :root {
-  --color-paper:       #faf8f4;
-  --color-surface:     #ffffff;
-  --color-ink:         #1c1917;
-  --color-muted:       #78716c;
-  --color-faint:       #a8a29e;
-  --color-border:      #e7e5e0;
-  --color-warm-gray:   #c9b99a;
-  --color-accent:      #f5e6c3;
-  --color-accent-text: #92400e;
-  --color-code-bg:     #f0ede8;
-  --color-dark:        #1c1917;
+  --color-paper:         #faf8f4;
+  --color-surface:       #ffffff;
+  --color-ink:           #1c1917;
+  --color-muted:         #78716c;
+  --color-faint:         #a8a29e;
+  --color-border:        #e7e5e0;
+  --color-warm-gray:     #c9b99a;
+  --color-accent:        #f5e6c3;
+  --color-accent-text:   #92400e;
+  --color-code-bg:       #f0ede8;
+  --color-dark:          #1c1917;
+  --color-blockquote-bg: #fdfbf6;
+  --color-card-hover:    #fdfbf6;
+  --color-highlight-bg:  #f5e6c3;
+  --color-footer-text:   #faf8f4;
 
   --width-page:    min(1200px, 96vw);
   --width-reading: min(720px, 92vw);
   --width-content: min(960px, 94vw);
+}
+
+/* --------------------------------------------------
+   DESIGN TOKENS — Dark mode
+   -------------------------------------------------- */
+[data-theme="dark"] {
+  --color-paper:         #171512;
+  --color-surface:       #201d1a;
+  --color-ink:           #e8e0d5;
+  --color-muted:         #9b9085;
+  --color-faint:         #6b6259;
+  --color-border:        #33302b;
+  --color-warm-gray:     #7a7060;
+  --color-accent:        #4a3720;
+  --color-accent-text:   #e0b04c;
+  --color-code-bg:       #1a1815;
+  --color-dark:          #0f0e0c;
+  --color-blockquote-bg: #1c1916;
+  --color-card-hover:    #1c1916;
+  --color-highlight-bg:  #5c4427;
+  --color-footer-text:   #e8e0d5;
+}
+
+/* Smooth theme transition */
+html.transitioning,
+html.transitioning *,
+html.transitioning *::before,
+html.transitioning *::after {
+  transition: background-color 400ms ease,
+              color 400ms ease,
+              border-color 400ms ease,
+              box-shadow 400ms ease,
+              opacity 400ms ease !important;
 }
 
 /* --------------------------------------------------
@@ -90,7 +127,7 @@ img {
   height: 58px;
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
-  box-shadow: 0 1px 12px rgba(28, 25, 23, 0.04);
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
 }
 
 .header-inner {
@@ -156,6 +193,60 @@ img {
 }
 
 /* --------------------------------------------------
+   THEME TOGGLE
+   -------------------------------------------------- */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--color-muted);
+  margin-left: 18px;
+  border-radius: 50%;
+  transition: all 200ms ease;
+  position: relative;
+  top: 1px;
+}
+
+.theme-toggle:hover {
+  color: var(--color-ink);
+  background: var(--color-code-bg);
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+  transition: transform 500ms ease, opacity 300ms ease;
+}
+
+.theme-toggle .icon-sun {
+  position: absolute;
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.theme-toggle .icon-moon {
+  position: absolute;
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+[data-theme="dark"] .theme-toggle .icon-sun {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+
+[data-theme="dark"] .theme-toggle .icon-moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* --------------------------------------------------
    SITE FOOTER - full width
    -------------------------------------------------- */
 .site-footer {
@@ -179,7 +270,7 @@ img {
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-size: 1rem;
-  color: var(--color-paper);
+  color: var(--color-footer-text);
 }
 
 .footer-credit {
@@ -400,7 +491,7 @@ img {
 }
 
 .post-card:hover {
-  background: #fdfbf6;
+  background: var(--color-card-hover);
 }
 
 .card-date {
@@ -627,7 +718,7 @@ img {
 
 .post-body blockquote {
   border-left: 3px solid var(--color-accent);
-  background: #fdfbf6;
+  background: var(--color-blockquote-bg);
   padding: 22px 26px;
   margin: 34px 0;
   border-radius: 0;
@@ -856,7 +947,7 @@ img {
 
 .project-card:hover {
   border-left-color: var(--color-accent);
-  box-shadow: 0 2px 8px rgba(28, 25, 23, 0.04);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
 .project-name {
@@ -953,14 +1044,14 @@ img {
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: #78716c;
+  background: var(--color-muted);
   display: inline-block;
   opacity: 0.5;
 }
 
 .code-lang {
   background: var(--color-accent);
-  color: var(--color-dark);
+  color: var(--color-accent-text);
   font-family: 'Jost', sans-serif;
   font-size: 10px;
   font-weight: 400;
@@ -986,11 +1077,11 @@ img {
 }
 
 .code-copy:hover {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 .code-copy.copied {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 .code-grid {
@@ -1042,7 +1133,7 @@ img {
 }
 
 /* --------------------------------------------------
-   HIGHLIGHT.JS CUSTOM THEME
+   HIGHLIGHT.JS — Light theme
    -------------------------------------------------- */
 .hljs {
   background: transparent !important;
@@ -1115,7 +1206,60 @@ img {
   opacity: 0.5;
 }
 
-/* Shell prompt styling */
+/* --------------------------------------------------
+   HIGHLIGHT.JS — Dark theme override
+   -------------------------------------------------- */
+[data-theme="dark"] .hljs {
+  color: #e8e0d5 !important;
+}
+
+[data-theme="dark"] .hljs-keyword,
+[data-theme="dark"] .hljs-selector-tag,
+[data-theme="dark"] .hljs-built_in,
+[data-theme="dark"] .hljs-section,
+[data-theme="dark"] .hljs-tag {
+  color: #e8e0d5;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .hljs-string,
+[data-theme="dark"] .hljs-attr,
+[data-theme="dark"] .hljs-addition {
+  color: #e0b04c;
+}
+
+[data-theme="dark"] .hljs-comment,
+[data-theme="dark"] .hljs-quote,
+[data-theme="dark"] .hljs-meta {
+  color: #6b6259;
+  font-style: italic;
+}
+
+[data-theme="dark"] .hljs-function .hljs-title,
+[data-theme="dark"] .hljs-title.function_,
+[data-theme="dark"] .hljs-title.class_,
+[data-theme="dark"] .hljs-title.class_.inherited__ {
+  color: #e8e0d5;
+  font-style: italic;
+}
+
+[data-theme="dark"] .hljs-number,
+[data-theme="dark"] .hljs-literal,
+[data-theme="dark"] .hljs-symbol,
+[data-theme="dark"] .hljs-bullet {
+  color: #9b9085;
+}
+
+[data-theme="dark"] .hljs-type {
+  color: #9b9085;
+  font-style: italic;
+}
+
+[data-theme="dark"] .hljs-link {
+  color: #e0b04c;
+}
+
+/* Shell prompt */
 .sh-prompt {
   color: var(--color-muted);
   font-weight: 400;
@@ -1245,6 +1389,9 @@ img {
   }
   .code-body pre {
     padding: 14px 16px;
+  }
+  .theme-toggle {
+    margin-left: 12px;
   }
 }
 

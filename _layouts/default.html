@@ -24,6 +24,35 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/css.min.js"></script>
   <script>
     (function() {
+
+      var STORAGE_KEY = 'theme';
+
+      function getTheme() {
+        var stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) return stored;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+
+      function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem(STORAGE_KEY, theme);
+      }
+
+      function toggleTheme() {
+        var html = document.documentElement;
+        html.classList.add('transitioning');
+        var next = (html.getAttribute('data-theme') === 'dark') ? 'light' : 'dark';
+        setTheme(next);
+        setTimeout(function() { html.classList.remove('transitioning'); }, 500);
+      }
+
+      var btn = document.getElementById('theme-toggle');
+      if (btn) btn.addEventListener('click', toggleTheme);
+
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem(STORAGE_KEY)) setTheme(e.matches ? 'dark' : 'light');
+      });
+
       function buildCodeBlock(codeEl) {
         var pre = codeEl.parentElement;
         if (!pre || pre.tagName !== 'PRE') return;
@@ -65,23 +94,23 @@
         label.textContent = lang === 'code' ? 'CODE' : lang.toUpperCase();
         left.appendChild(label);
 
-        var btn = document.createElement('button');
-        btn.className = 'code-copy';
-        btn.textContent = 'COPY';
-        btn.addEventListener('click', function() {
+        var btn2 = document.createElement('button');
+        btn2.className = 'code-copy';
+        btn2.textContent = 'COPY';
+        btn2.addEventListener('click', function() {
           var text = codeEl.textContent;
           var done = function() {
-            btn.textContent = 'COPIED';
-            btn.classList.add('copied');
+            btn2.textContent = 'COPIED';
+            btn2.classList.add('copied');
             setTimeout(function() {
-              btn.textContent = 'COPY';
-              btn.classList.remove('copied');
+              btn2.textContent = 'COPY';
+              btn2.classList.remove('copied');
             }, 2000);
           };
           if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(text).then(done).catch(function() {
-              btn.textContent = 'ERROR';
-              setTimeout(function() { btn.textContent = 'COPY'; }, 2000);
+              btn2.textContent = 'ERROR';
+              setTimeout(function() { btn2.textContent = 'COPY'; }, 2000);
             });
           } else {
             var ta = document.createElement('textarea');
@@ -90,13 +119,13 @@
             document.body.appendChild(ta);
             ta.select();
             try { document.execCommand('copy'); done(); }
-            catch(e) { btn.textContent = 'ERROR'; setTimeout(function() { btn.textContent = 'COPY'; }, 2000); }
+            catch(e) { btn2.textContent = 'ERROR'; setTimeout(function() { btn2.textContent = 'COPY'; }, 2000); }
             document.body.removeChild(ta);
           }
         });
 
         bar.appendChild(left);
-        bar.appendChild(btn);
+        bar.appendChild(btn2);
         wrapper.insertBefore(bar, wrapper.firstChild);
 
         var rawLines = codeEl.textContent.split('\n');
@@ -115,27 +144,24 @@
             nums.appendChild(n);
           }
 
-          var body = document.createElement('div');
-          body.className = 'code-body';
-          body.appendChild(pre);
+          var bodyEl = document.createElement('div');
+          bodyEl.className = 'code-body';
+          bodyEl.appendChild(pre);
 
           grid.appendChild(nums);
-          grid.appendChild(body);
+          grid.appendChild(bodyEl);
           wrapper.appendChild(grid);
         } else {
-          var body = document.createElement('div');
-          body.className = 'code-body code-body-full';
-          body.appendChild(pre);
-          wrapper.appendChild(body);
+          var bodyEl = document.createElement('div');
+          bodyEl.className = 'code-body code-body-full';
+          bodyEl.appendChild(pre);
+          wrapper.appendChild(bodyEl);
         }
 
         if (isShell) {
           var html = codeEl.innerHTML;
           html = html.replace(/^(<span[^>]*>)?(\$\s)/gm, function(m, span, dollar) {
             return '<span class="sh-prompt">$</span> ' + (span || '');
-          });
-          html = html.replace(/^(<span[^>]*>)?(#.*)/gm, function(m, span, comment) {
-            return '<span class="sh-comment">' + m + '</span>';
           });
           codeEl.innerHTML = html;
         }
