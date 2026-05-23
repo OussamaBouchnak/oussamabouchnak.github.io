@@ -358,12 +358,32 @@ img {
    -------------------------------------------------- */
 .featured-post {
   display: grid;
-  grid-template-columns: 1fr 1px 1fr;
-  border-bottom: 1px solid var(--color-border);
+  grid-template-columns: 1fr 1px 360px;
+  min-height: 300px;
 }
 
 .featured-left {
-  padding: 56px 56px 56px 0;
+  padding: 48px 56px 48px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.featured-item {
+  display: flex;
+  flex-direction: column;
+  padding: 28px 0;
+}
+
+.featured-item:first-child {
+  padding-top: 0;
+}
+
+.featured-item:last-child {
+  padding-bottom: 0;
+}
+
+.featured-item-divider {
+  border-bottom: 1px solid var(--color-border);
 }
 
 .featured-divider {
@@ -372,19 +392,24 @@ img {
 }
 
 .featured-right {
-  padding: 56px 0 56px 56px;
+  padding: 48px 0 48px 32px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  overflow-y: auto;
 }
 
 .featured-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 2.2rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.25;
   color: var(--color-ink);
-  margin: 10px 0 18px;
+  margin: 6px 0 10px;
+}
+
+.featured-item:first-child .featured-title {
+  font-size: 1.8rem;
 }
 
 .featured-title a:hover {
@@ -394,20 +419,25 @@ img {
 .featured-excerpt {
   font-family: 'Jost', sans-serif;
   font-weight: 300;
-  font-size: 15px;
-  line-height: 1.8;
+  font-size: 14px;
+  line-height: 1.75;
   color: var(--color-muted);
-  margin-bottom: 22px;
+  margin-bottom: 14px;
+}
+
+.featured-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .featured-date {
   font-family: 'Jost', sans-serif;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--color-faint);
-  margin-bottom: 24px;
 }
 
 .also-label {
@@ -415,7 +445,7 @@ img {
   font-size: 1rem;
   font-weight: 600;
   color: var(--color-ink);
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   letter-spacing: 0.02em;
 }
 
@@ -435,10 +465,11 @@ img {
 
 .also-list a {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 400;
   color: var(--color-ink);
   line-height: 1.4;
+  display: block;
 }
 
 .also-list a:hover {
@@ -1292,13 +1323,20 @@ img {
     grid-template-columns: 1fr;
   }
   .featured-left {
-    padding: 40px 0 20px;
+    padding: 24px 0;
   }
   .featured-divider {
     display: none;
   }
   .featured-right {
-    padding: 20px 0 40px;
+    padding: 0 0 32px;
+    border-top: 1px solid var(--color-border);
+  }
+  .featured-title {
+    font-size: 1.35rem;
+  }
+  .featured-item:first-child .featured-title {
+    font-size: 1.55rem;
   }
   .card-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1314,9 +1352,6 @@ img {
   }
   .post-title {
     font-size: 2.3rem;
-  }
-  .featured-title {
-    font-size: 1.8rem;
   }
   .toc-year {
     font-size: 5rem;
@@ -1384,7 +1419,10 @@ img {
   }
 
   .featured-title {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+  }
+  .featured-item:first-child .featured-title {
+    font-size: 1.4rem;
   }
 
   .blog-header,
@@ -1496,11 +1534,24 @@ img {
   }
 
   .featured-left {
-    padding: 32px 0 16px;
+    padding: 20px 0;
   }
 
   .featured-right {
-    padding: 0 0 32px;
+    padding: 0 0 24px;
+  }
+
+  .featured-title {
+    font-size: 1.15rem;
+  }
+
+  .featured-item:first-child .featured-title {
+    font-size: 1.3rem;
+  }
+
+  .featured-excerpt {
+    font-size: 13px;
+    line-height: 1.65;
   }
 
   .tagline-strip {
@@ -1526,15 +1577,6 @@ img {
   .post-meta {
     font-size: 10px;
     margin-top: 14px;
-  }
-
-  .featured-title {
-    font-size: 1.3rem;
-  }
-
-  .featured-excerpt {
-    font-size: 13px;
-    line-height: 1.65;
   }
 
   .blog-header,
