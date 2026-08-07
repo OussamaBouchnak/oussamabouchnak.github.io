@@ -720,7 +720,7 @@ img {
   line-height: 1.9;
 }
 
-.post-body p:first-of-type::first-letter {
+.post-body p:first-of-type:not(.back-nav)::first-letter {
   font-family: 'Cormorant Garamond', serif;
   font-size: 4.5rem;
   font-weight: 600;
@@ -1466,7 +1466,7 @@ img {
     margin-bottom: -16px;
   }
 
-  .post-body p:first-of-type::first-letter {
+  .post-body p:first-of-type:not(.back-nav)::first-letter {
     font-size: 3.5rem;
   }
 
@@ -1656,7 +1656,7 @@ img {
     padding: 0 12px 40px;
   }
 
-  .post-body p:first-of-type::first-letter {
+  .post-body p:first-of-type:not(.back-nav)::first-letter {
     font-size: 3rem;
   }
 
