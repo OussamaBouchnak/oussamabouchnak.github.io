@@ -6,6 +6,8 @@ category: "German"
 excerpt: "Studio 21 A1 lessons"
 ---
 
+[← Back to German A1](/2026/07/a1/)
+
 
 # 1. Lesson Overview
 

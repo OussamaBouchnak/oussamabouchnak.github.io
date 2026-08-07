@@ -6,6 +6,8 @@ category: "German"
 excerpt: "Studio 21 A1 lessons"
 ---
 
+[← Back to German A1](/2026/07/a1/)
+
 # 1. Lesson Overview
 
 *   **Communication Goals**: Describing and commenting on apartments, houses, and rooms, writing and understanding addresses, talking about living situations in different countries, and expressing ownership.

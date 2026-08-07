@@ -6,6 +6,8 @@ category: "German"
 excerpt: "Studio 21 A1 lessons"
 ---
 
+[← Back to German A1](/2026/07/a1/)
+
 # 1. Lesson Overview
 
 *   **Communication Goals**: Naming body parts, describing symptoms and illnesses at the doctor's office, understanding and giving medical advice or instructions, and expressing emotions and feelings.
