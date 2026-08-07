@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Kleidung und Wetter"
+date: 2026-07-12
 category: "German"
 excerpt: "Studio 21 A1 lessons"
 ---

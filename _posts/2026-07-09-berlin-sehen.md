@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Berlin sehen"
+date: 2026-07-09
 category: "German"
 excerpt: "Studio 21 A1 lessons"
 ---

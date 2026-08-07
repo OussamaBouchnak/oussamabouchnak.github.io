@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Menschen und Häuser"
+date: 2026-07-05
 category: "German"
 excerpt: "Studio 21 A1 lessons"
 ---

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Sprache im Kurz"
+date: 2026-07-03
 category: "German"
 excerpt: "Studio 21 A1 lessons"
 ---

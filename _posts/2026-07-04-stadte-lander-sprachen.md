@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Städte - Länder - Sprachen"
+date: 2026-07-04
 category: "German"
 excerpt: "Studio 21 A1 lessons"
 ---

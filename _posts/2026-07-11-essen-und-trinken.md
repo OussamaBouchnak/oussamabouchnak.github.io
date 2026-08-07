@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Essen und Trinken"
+date: 2026-07-11
 category: "German"
 excerpt: "Studio 21 A1 lessons"
 ---

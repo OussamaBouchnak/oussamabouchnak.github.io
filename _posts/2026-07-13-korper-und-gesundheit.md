@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Körper und Gesundheit"
+date: 2026-07-13
 category: "German"
 excerpt: "Studio 21 A1 lessons"
 ---

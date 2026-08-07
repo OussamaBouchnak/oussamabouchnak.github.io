@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Ab in den Urlaub"
+date: 2026-07-10
 category: "German"
 excerpt: "Studio 21 A1 lessons"
 ---

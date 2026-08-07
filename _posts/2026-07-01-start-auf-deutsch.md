@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Start auf Deutsch"
+date: 2026-07-01
 category: "German"
 excerpt: "Studio 21 A1 lessons"
 ---

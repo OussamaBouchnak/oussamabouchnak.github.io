@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Kaffee oder Tee"
+date: 2026-07-02
 category: "German"
 excerpt: "Studio 21 A1 lessons"
 ---

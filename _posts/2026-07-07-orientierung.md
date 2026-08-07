@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Orientierung"
+date: 2026-07-07
 category: "German"
 excerpt: "Studio 21 A1 lessons"
 ---

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Termine"
+date: 2026-07-06
 category: "German"
 excerpt: "Studio 21 A1 lessons"
 ---
